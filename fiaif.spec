@@ -59,10 +59,13 @@ instalacji na ¶cianie ogniowej.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
-%{__make} install-config DESTDIR=$RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+%{__make} install-config \
+	DESTDIR=$RPM_BUILD_ROOT
+
 install src/fiaif $RPM_BUILD_ROOT/etc/rc.d/init.d/fiaif
 
 %clean
