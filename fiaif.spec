@@ -7,6 +7,7 @@ Release:	1
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://fiaif.fugmann.dhs.org/dist/%{name}_%{version}-%{rel}.tar.gz
+# Source0-md5:	b1454b4f8755502186cb2033ccf30cc4
 URL:		http://fiaif.fugmann.dhs.org/
 Requires(post,preun):	/sbin/chkconfig
 Requires:	bash >= 2.04
