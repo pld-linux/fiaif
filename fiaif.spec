@@ -1,14 +1,13 @@
-%define		rel	2
 Summary:	Fiaif is an Intelligent Firewall for iptables based Linux systems
 Summary(pl):	Fiaif - inteligentny firewall bazuj±cy na iptables
 Name:		fiaif
-Version:	1.6.2
+Version:	1.17.2
 Release:	1
 License:	GPL
 Group:		Networking/Utilities
-Source0:	http://fiaif.fugmann.dhs.org/dist/%{name}_%{version}-%{rel}.tar.gz
-# Source0-md5:	b1454b4f8755502186cb2033ccf30cc4
-URL:		http://fiaif.fugmann.dhs.org/
+Source0:	http://www.fiaif.net/dist/%{name}_%{version}.tar.gz
+# Source0-md5:	40b705f83171b4c17b233a510b615874
+URL:		http://www.fiaif.net/
 Requires(post,preun):	/sbin/chkconfig
 Requires:	bash >= 2.04
 Requires:	grep
@@ -55,7 +54,7 @@ Skrypt napisany jest w bashu, co pozwala na zmniejszenie koniecznej
 instalacji na ¶cianie ogniowej.
 
 %prep
-%setup -q -n %{name}-%{version}_%{rel}
+%setup -q -n %{name}-%{version}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -66,7 +65,7 @@ install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 %{__make} install-config \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install src/fiaif $RPM_BUILD_ROOT/etc/rc.d/init.d/fiaif
+install prog/fiaif $RPM_BUILD_ROOT/etc/rc.d/init.d/fiaif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -91,10 +90,11 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc todo doc/faq.txt doc/DHCP.txt doc/reporting_bugs.txt
+%doc doc/faq.txt doc/DHCP.txt doc/reporting_bugs.txt doc/upgrade.txt
 
 %dir %attr(700,root,root) %{_sysconfdir}/fiaif
 %dir %attr(700,root,root) /var/lib/fiaif
+%attr(0600,root,root) %{_sysconfdir}/cron.daily/fiaif
 %config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.dmz
 %config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.ext
 %config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.int
@@ -102,9 +102,12 @@ fi
 %config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/reserved_networks
 %config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/private_networks
 %config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/type_of_services
+%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/aliases
 
 %attr(754,root,root) /etc/rc.d/init.d/fiaif
 %attr(755,root,root) %{_sbindir}/fiaif-scan
+%attr(755,root,root) %{_sbindir}/fiaif-getdev
+%attr(755,root,root) %{_sbindir}/fiaif-update
 
 %dir %{_datadir}/fiaif
 %{_datadir}/fiaif/traffic-shaping.sh
@@ -115,9 +118,16 @@ fi
 %{_datadir}/fiaif/sanity_check.sh
 %{_datadir}/fiaif/constants.sh
 %{_datadir}/fiaif/cleanup_rules.sh
+%{_datadir}/fiaif/aliases.sh
+%{_datadir}/fiaif/cleanup_rules.awk
+%{_datadir}/fiaif/fiaif_rules.awk
+%{_datadir}/fiaif/syntax.awk
+%{_datadir}/fiaif/zone_rules.awk
 %{_datadir}/fiaif/VERSION
 
 %{_mandir}/man8/fiaif.8*
 %{_mandir}/man5/zone.conf.5*
 %{_mandir}/man5/fiaif.conf.5*
 %{_mandir}/man8/fiaif-scan.8*
+%{_mandir}/man8/fiaif-getdev.8*
+%{_mandir}/man8/fiaif-update.8*
