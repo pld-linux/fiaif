@@ -3,13 +3,14 @@ Summary:	Fiaif is an Intelligent Firewall for iptables based Linux systems.
 Summary(pl):	Fiaif to inteligentny firewall bazuj±cy na iptables.
 Name:		fiaif
 Version:	1.3.0
-Release:	0.1
+Release:	0.3
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://fiaif.fugmann.dhs.org/dist/%{name}_%{version}-%{rel}.tar.gz
 URL:		http://fiaif.fugmann.dhs.org/
 BuildArch:	noarch
-Requires:	iptables, bash >= 2.04, sed, grep, textutils, sh-utils, chkconfig
+Requires:	iptables, bash >= 2.04, sed, grep, textutils, sh-utils
+Prereq:         /sbin/chkconfig
 Conflicts:	ipmasq, knetfilter, firewall-easy, shorewall, firewall-init
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -41,30 +42,41 @@ Install this package if your machine is ever on the internet.
 rm -rf $RPM_BUILD_ROOT
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 %{__make} install-config DESTDIR=$RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8} \
+	$RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
+install src/fiaif $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/fiaif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if [ -x /sbin/chkconfig ]; then /sbin/chkconfig --level 345 fiaif on;  fi
-# Make sure that old state does not exist
-[ -f /var/state/fiaif/iptables ] && rm -f /var/state/fiaif/iptables
+/sbin/chkconfig --add fiaif 
+if [ -f /var/state/fiaif/iptables ]; then
+	/etc/rc.d/init.d/fiaif restart >&2
+else
+	echo "Execute \"/etc/rc.d/init.d/fiaif start\" to start fiaif."
+fi
 
 %preun
-if [ $1 = 0 ]; then if [ -x /sbin/chkconfig ]; then /sbin/chkconfig --del fiaif; fi ; fi
+if [ "$1" = "0" ]; then
+	if [ -f /var/state/fiaif/iptables ]; then
+		/etc/rc.d/init.d/fiaif stop >&2
+	fi
+	/sbin/chkconfig --del fiaif
+fi
 
 %files
 %defattr(644,root,root,755)
 
 %dir %attr(0700,root,root) %{_sysconfdir}/fiaif/
 %dir /var/state/fiaif/
-%config %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.dmz
-%config %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.ext
-%config %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.int
-%config %attr(0600,root,root) %{_sysconfdir}/fiaif/fiaif.conf
-%config %attr(0600,root,root) %{_sysconfdir}/fiaif/reserved_networks
-%config %attr(0600,root,root) %{_sysconfdir}/fiaif/private_networks
-%config %attr(0600,root,root) %{_sysconfdir}/fiaif/type_of_services
+%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.dmz
+%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.ext
+%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.int
+%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/fiaif.conf
+%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/reserved_networks
+%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/private_networks
+%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/type_of_services
 
 %attr(0755,root,root) %{_sysconfdir}/rc.d/init.d/fiaif
 %attr(0755,root,root) %{_sbindir}/fiaif-scan
