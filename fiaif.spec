@@ -2,8 +2,8 @@
 Summary:	Fiaif is an Intelligent Firewall for iptables based Linux systems
 Summary(pl):	Fiaif - inteligentny firewall bazuj±cy na iptables
 Name:		fiaif
-Version:	1.4.3
-Release:	0.8
+Version:	1.5.2
+Release:	0.9
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://fiaif.fugmann.dhs.org/dist/%{name}_%{version}-%{rel}.tar.gz
@@ -87,7 +87,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc todo doc/faq.txt
+%doc todo doc/faq.txt doc/DHCP.txt doc/reporting_bugs.txt
 
 %dir %attr(700,root,root) %{_sysconfdir}/fiaif
 %dir %attr(700,root,root) /var/lib/fiaif
@@ -110,6 +110,7 @@ fi
 %{_datadir}/fiaif/proc-check.sh
 %{_datadir}/fiaif/sanity_check.sh
 %{_datadir}/fiaif/constants.sh
+%{_datadir}/fiaif/cleanup_rules.sh
 %{_datadir}/fiaif/VERSION
 
 %{_mandir}/man8/fiaif.8*
