@@ -3,7 +3,7 @@ Summary:	Fiaif is an Intelligent Firewall for iptables based Linux systems.
 Summary(pl):	Fiaif to inteligentny firewall bazuj±cy na iptables.
 Name:		fiaif
 Version:	1.3.0
-Release:	0.3
+Release:	0.4
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://fiaif.fugmann.dhs.org/dist/%{name}_%{version}-%{rel}.tar.gz
@@ -51,10 +51,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add fiaif 
+chkconfig --level 345 fiaif on
 if [ -f /var/state/fiaif/iptables ]; then
 	/etc/rc.d/init.d/fiaif restart >&2
 else
-	echo "Execute \"/etc/rc.d/init.d/fiaif start\" to start fiaif."
+	echo "Configure fiaif and remove the line 'DONT_START=1'"
+	echo "from /etc/fiaif/fiaif.conf, then execute"
+	echo "'/etc/rc.d/init.d/fiaif start' to start fiaif."
 fi
 
 %preun
