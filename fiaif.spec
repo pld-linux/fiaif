@@ -3,7 +3,7 @@ Summary:	Fiaif is an Intelligent Firewall for iptables based Linux systems.
 Summary(pl):	Fiaif to inteligentny firewall bazuj±cy na iptables.
 Name:		fiaif
 Version:	1.3.0
-Release:	0.4
+Release:	0.5
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://fiaif.fugmann.dhs.org/dist/%{name}_%{version}-%{rel}.tar.gz
@@ -15,24 +15,41 @@ Conflicts:	ipmasq, knetfilter, firewall-easy, shorewall, firewall-init
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-The Goal of FIAIF is to provide a highly customizable script for
-setting up an iptables based firewall.
+The Goal of  FIAIF is to provide a  highly customizable script
+for setting up an iptables based firewall.
 
-Unlike many other scripts, FIAIF can be truly customized allowing
-multiple interfaces (or rather zones). There is no limit on the number
-of zones. All configuration is done through configuration files. No
-need to understand the script behind it all.
+Unlike  many  other scripts,  FIAIF  can  be truly  customized
+allowing multiple  interfaces (or  rather zones). There  is no
+limit  on  the number  of  zones.  All configuration  is  done
+through configuration files. No  need to understand the script
+behind it all.
 
-The script makes heavy use of state-full firewalling, and all RELATED
-and ESTABLISHED packets are accepted on all chains. If you which to
-block something out, do not accept it in the first place.
+The script makes heavy use  of state-full firewalling, and all
+RELATED and ESTABLISHED packets are accepted on all chains. If
+you which  to block  something out,  do not  accept it  in the
+first place.
 
-The script is written in BASH. Though this is not the optimal program
-to use, it means that you do not need to install extra interpreters on
-your firewall. This allows you to have a minimalistic installation on
-your firewall.
+The script is written in BASH.  Though this is not the optimal
+program to use, it means that you do not need to install extra
+interpreters  on your  firewall.  This allows  you  to have  a
+minimalistic installation on your firewall.
 
 Install this package if your machine is ever on the internet.
+
+%description -l pl
+Celem FIAIF jest  udostêpnienie wysoce dostosowawczego skryptu
+zak³adania regu³ ¶ciany ogniowej opartej na netfiltrze.
+
+W   przeciwieñstwie  do   innych  skryptów,   FIAIF  umo¿liwia
+ustawianie regu³ na wielu interfejsach, a raczej strefach. Nie
+ma limitu stref.
+
+Skrypt  mocno u¿ywa  zabezpieczeñ typu  'state-full', napisany
+jest w bashu, co pozwala na zmniejszenie koniecznej instalacji
+na ¶cianie ogniowej.
+
+Zainstaluj  ten  pakiet,  gdy  twoja  maszyna  jest  na  sta³e
+pod³±czona do internetu.
 
 %prep
 %setup -q -n %{name}-%{version}_%{rel}
