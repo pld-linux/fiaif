@@ -2,13 +2,11 @@
 Summary:	Fiaif is an Intelligent Firewall for iptables based Linux systems
 Summary(pl):	Fiaif - inteligentny firewall bazuj±cy na iptables
 Name:		fiaif
-Version:	1.3.0
-Release:	0.6
+Version:	1.4.3
+Release:	0.8
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://fiaif.fugmann.dhs.org/dist/%{name}_%{version}-%{rel}.tar.gz
-Patch0:		%{name}-FHS.patch
-Patch1:		%{name}-chkconfig.patch
 URL:		http://fiaif.fugmann.dhs.org/
 Requires(post,preun):	/sbin/chkconfig
 Requires:	bash >= 2.04
@@ -57,8 +55,6 @@ instalacji na ¶cianie ogniowej.
 
 %prep
 %setup -q -n %{name}-%{version}_%{rel}
-%patch0 -p1
-%patch1 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -74,7 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 %post
 /sbin/chkconfig --add fiaif
 if [ -f /var/lib/fiaif/iptables ]; then
-	/etc/rc.d/init.d/fiaif restart >&2
+	/etc/rc.d/init.d/fiaif force-reload >&2
 else
 	echo "Configure fiaif and remove the line 'DONT_START=1'"
 	echo "from /etc/fiaif/fiaif.conf, then execute"
@@ -91,7 +87,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc todo VERSION doc/faq.txt
+%doc todo doc/faq.txt
 
 %dir %attr(700,root,root) %{_sysconfdir}/fiaif
 %dir %attr(700,root,root) /var/lib/fiaif
@@ -114,6 +110,7 @@ fi
 %{_datadir}/fiaif/proc-check.sh
 %{_datadir}/fiaif/sanity_check.sh
 %{_datadir}/fiaif/constants.sh
+%{_datadir}/fiaif/VERSION
 
 %{_mandir}/man8/fiaif.8*
 %{_mandir}/man5/zone.conf.5*
