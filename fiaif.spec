@@ -12,7 +12,6 @@ Requires(post,preun):	/sbin/chkconfig
 Requires:	bash >= 2.04
 Requires:	grep
 Requires:	iptables >= 1.2.7a
-Requires:	sed
 Requires:	sh-utils
 Requires:	textutils
 Conflicts:	ipmasq, knetfilter, firewall-easy, shorewall, firewall-init
