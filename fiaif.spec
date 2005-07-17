@@ -53,7 +53,7 @@ Skrypt napisany jest w bashu, co pozwala na zmniejszenie koniecznej
 instalacji na ¶cianie ogniowej.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 %install
 rm -rf $RPM_BUILD_ROOT
