@@ -1,13 +1,21 @@
 Summary:	Fiaif is an Intelligent Firewall for iptables based Linux systems
 Summary(pl):	Fiaif - inteligentny firewall bazuj±cy na iptables
 Name:		fiaif
-Version:	1.18.0
+Version:	1.19.2
 Release:	1
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://www.fiaif.net/dist/%{name}_%{version}.tar.gz
-# Source0-md5:	1a089daa333d4dd5db632073a1fa92a2
+# Source0-md5:	9042013b1aba5ce20e42c4c235094f82
 URL:		http://www.fiaif.net/
+BuildRequires:	tetex-dvips
+BuildRequires:	tetex-fonts-jknappen
+BuildRequires:	tetex-format-latex
+BuildRequires:	tetex-latex-ams
+BuildRequires:	tetex-latex-bibtex
+BuildRequires:	tetex-latex-psnfss
+BuildRequires:	tetex-makeindex
+BuildRequires:	tetex-metafont
 Requires(post,preun):	/sbin/chkconfig
 Requires:	bash >= 2.04
 Requires:	grep
@@ -93,15 +101,15 @@ fi
 
 %dir %attr(700,root,root) %{_sysconfdir}/fiaif
 %dir %attr(700,root,root) /var/lib/fiaif
-%attr(0600,root,root) %{_sysconfdir}/cron.daily/fiaif
-%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.dmz
-%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.ext
-%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/zone.int
-%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/fiaif.conf
-%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/reserved_networks
-%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/private_networks
-%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/type_of_services
-%config(noreplace) %verify(not size mtime md5) %attr(0600,root,root) %{_sysconfdir}/fiaif/aliases
+%attr(600,root,root) %{_sysconfdir}/cron.daily/fiaif
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fiaif/zone.dmz
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fiaif/zone.ext
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fiaif/zone.int
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fiaif/fiaif.conf
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fiaif/reserved_networks
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fiaif/private_networks
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fiaif/type_of_services
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fiaif/aliases
 
 %attr(754,root,root) /etc/rc.d/init.d/fiaif
 %attr(755,root,root) %{_sbindir}/fiaif-scan
