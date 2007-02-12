@@ -1,5 +1,5 @@
 Summary:	Fiaif is an Intelligent Firewall for iptables based Linux systems
-Summary(pl.UTF-8):   Fiaif - inteligentny firewall bazujący na iptables
+Summary(pl.UTF-8):	Fiaif - inteligentny firewall bazujący na iptables
 Name:		fiaif
 Version:	1.19.2
 Release:	1
