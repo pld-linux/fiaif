@@ -1,5 +1,5 @@
 Summary:	Fiaif is an Intelligent Firewall for iptables based Linux systems
-Summary(pl):	Fiaif - inteligentny firewall bazuj±cy na iptables
+Summary(pl.UTF-8):   Fiaif - inteligentny firewall bazujÄ…cy na iptables
 Name:		fiaif
 Version:	1.19.2
 Release:	1
@@ -44,21 +44,21 @@ to use, it means that you do not need to install extra interpreters on
 your firewall. This allows you to have a minimalistic installation on
 your firewall.
 
-%description -l pl
-Celem FIAIF jest udostêpnienie wysoce dostosowawczego skryptu
-ustawiania regu³ ¶ciany ogniowej opartej na netfiltrze.
+%description -l pl.UTF-8
+Celem FIAIF jest udostÄ™pnienie wysoce dostosowawczego skryptu
+ustawiania reguÅ‚ Å›ciany ogniowej opartej na netfiltrze.
 
-W przeciwieñstwie do innych skryptów, FIAIF umo¿liwia ustawianie regu³
-na wielu interfejsach, a raczej strefach. Nie ma limitu stref. Ca³±
-konfiguracjê przeprowadza siê za pomoc± plików konfiguracyjnych. Nie
-ma potrzeby rozumienia stoj±cego za nimi skryptu.
+W przeciwieÅ„stwie do innych skryptÃ³w, FIAIF umoÅ¼liwia ustawianie reguÅ‚
+na wielu interfejsach, a raczej strefach. Nie ma limitu stref. CaÅ‚Ä…
+konfiguracjÄ™ przeprowadza siÄ™ za pomocÄ… plikÃ³w konfiguracyjnych. Nie
+ma potrzeby rozumienia stojÄ…cego za nimi skryptu.
 
-Skrypt mocno u¿ywa zabezpieczeñ typu stateful, przepuszczaj±c
-wszystkie pakiety RELATED i ESTABLISHED na wszystkich ³añcuchach.
-¯eby co¶ zablokowaæ, wystarczy nie akceptowaæ tego na pocz±tku.
+Skrypt mocno uÅ¼ywa zabezpieczeÅ„ typu stateful, przepuszczajÄ…c
+wszystkie pakiety RELATED i ESTABLISHED na wszystkich Å‚aÅ„cuchach.
+Å»eby coÅ› zablokowaÄ‡, wystarczy nie akceptowaÄ‡ tego na poczÄ…tku.
 
 Skrypt napisany jest w bashu, co pozwala na zmniejszenie koniecznej
-instalacji na ¶cianie ogniowej.
+instalacji na Å›cianie ogniowej.
 
 %prep
 %setup -q
