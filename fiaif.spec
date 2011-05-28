@@ -1,21 +1,19 @@
 Summary:	Fiaif is an Intelligent Firewall for iptables based Linux systems
 Summary(pl.UTF-8):	Fiaif - inteligentny firewall bazujący na iptables
 Name:		fiaif
-Version:	1.19.2
-Release:	1
+Version:	1.22.1
+Release:	0.1
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://www.fiaif.net/dist/%{name}_%{version}.tar.gz
-# Source0-md5:	9042013b1aba5ce20e42c4c235094f82
+# Source0-md5:	14943ad87923c1f9ae492bc6b36c551e
 URL:		http://www.fiaif.net/
-BuildRequires:	tetex-dvips
-BuildRequires:	tetex-fonts-jknappen
-BuildRequires:	tetex-format-latex
-BuildRequires:	tetex-latex-ams
-BuildRequires:	tetex-latex-bibtex
-BuildRequires:	tetex-latex-psnfss
-BuildRequires:	tetex-makeindex
-BuildRequires:	tetex-metafont
+BuildRequires:	texlive-fonts-cmsuper
+BuildRequires:	texlive-fonts-jknappen
+BuildRequires:	texlive-latex-ams
+BuildRequires:	texlive-latex-moreverb
+BuildRequires:	texlive-latex-psnfss
+BuildRequires:	texlive-makeindex
 Requires(post,preun):	/sbin/chkconfig
 Requires:	bash >= 2.04
 Requires:	grep
